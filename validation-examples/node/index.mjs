@@ -1,3 +1,6 @@
+import { ed25519 } from "@noble/curves/ed25519";
+import {PublicKey} from "@solana/web3.js";
+
 function ANBFSignInMessage(
   domain,
   address,
@@ -90,5 +93,12 @@ function main() {
     console.error('Invalid JWT')
     return
   }
+  const publicKey = new PublicKey(payload.iss)
+  const sigverify = ed25519.verify(signature, Buffer.from(rawMessage), publicKey.toBytes())
+  if (!sigverify) {
+    console.error('Invalid JWT')
+    return
+  }
+  
   console.log('JWT is valid')
 }

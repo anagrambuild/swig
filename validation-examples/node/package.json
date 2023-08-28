@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@noble/curves": "^1.2.0",
+    "@solana/web3.js": "^1.78.4"
+  }
 }
