@@ -126,6 +126,7 @@ class KeyJWT {
     if ("signIn" in adapter) {
       const signinadapter = <SignInMessageSignerWalletAdapter>adapter;
       const signInOutput = await signinadapter.signIn({
+        domain: this.payload.aud,
         issuedAt: issuedAt,
         address: this.payload.iss,
         expirationTime: expirationTime,
@@ -153,6 +154,7 @@ class KeyJWT {
     } else {
       throw new Error("Adapter does not support signing");
     }
+    this.signature = Buffer.from(signature).toString("base64");
     this.signed = true;
   }
 
